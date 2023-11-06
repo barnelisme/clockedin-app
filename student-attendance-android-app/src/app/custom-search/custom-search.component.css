@@ -1,0 +1,107 @@
+.parameter-content{
+    width: 100%;
+}
+
+.parameter-title{
+    background-color: aliceblue;
+    width: 100%;
+    padding: 10px;
+}
+
+.parameter{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.parameter-box label {
+    margin-bottom: 5px;
+}
+
+.parameter-box select {
+    padding: 1px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.parameter-box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    width: 15%;
+}
+
+.parameter-box:not(:last-child) {
+    margin-right: 20px;
+}
+
+.btn{
+    position: relative;
+    top: 30px;
+    left: 230px;
+    width: 7%;
+    height: 45px;
+    background: rgb(17, 93, 180);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.btn i{
+    color: #fff;
+}
+
+.btn:hover{
+    background: rgb(11, 55, 105);
+}
+
+.student-record-title{
+    background-color: aliceblue;
+    width: 100%;
+    padding: 10px;
+}
+
+.student-record{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.student-box input {
+    border: transparent
+}
+
+.student-box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 2px;
+    width: 20%;
+}
+
+.student-record table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+  
+.student-record th, .student-record td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+  
+.student-record th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+  
+.student-record tr:hover {
+    background-color: #f9f9f9;
+}

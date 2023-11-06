@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<div class="wholePage">
+    <div class="navbar">
+        <div class="avatar">
+            <img src="assets/images/avatar.png" alt="logo">
+        </div>
+        <mat-toolbar class="mat-option_bar">
+            <button mat-button type="submit" class="btn-standard" (click)= "dashboard()">STANDARD DASHBOARD</button>
+        </mat-toolbar>
+    </div>
+    
+    <div class="top">
+        <div class="searchbar">
+            <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchInput">
+        </div>
+
+        <mat-grid-list cols="1" rowHeight="600px">
+            <mat-grid-tile>
+                <mat-card-content class="parameter-content"> 
+                    <div class="student-record-content">
+                        <div class="student-record-title">
+                            <h2>USERS</h2>
+                        </div>
+                        <div class="user-record">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>SURNAME</th>
+                                  <th>ID</th>
+                                  <th>POSITION</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let user of userlist | filterUsers: searchInput">
+                                  <td>{{ user.surname }}</td>
+                                  <td>{{ user.id }}</td>
+                                  <td>{{ user.position }}</td>
+                                  <td>
+                                    <button mat-button type="submit" class="btn-remove" (click)="removeUser(user.id)">
+                                        <i class="bi bi-dash-square-fill"></i>
+                                      </button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            <mat-paginator
+                                [length]="userlist.length"              
+                                [pageSize]="pageSize"   
+                                [pageIndex]="currentPage - 1"
+                                (page)="pageChanged($event)">
+                            </mat-paginator>
+
+                          </div> 
+                    </div>
+                </mat-card-content> 
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="right-part">
+        <div class="usergraph">
+            <ngx-charts-pie-chart
+            [view]="[300,300]"
+            [results]="multi"
+            [gradient]="gradient"
+            [legend]="showLegend"
+            [legendTitle]="legendTitle"
+            [doughnut]="isDoughnut">
+            </ngx-charts-pie-chart>
+        </div>
+        
+        <button (click)="showPieChart()" class="chartButon">Pie Chart</button>
+        <button (click)="showDoughnutChart()" class="chartButon">Doughnut</button>
+
+        <div class="addButton">
+            <button mat-button type="submit" class="btn-add" (click)= "add()"><i class="bi bi-plus-circle-fill"></i></button>
+        </div>
+    </div>
+</div> 

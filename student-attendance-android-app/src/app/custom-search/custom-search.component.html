@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+
+<mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-card-content class="parameter-content">
+            <div class="paramater-container">
+                <div class="parameter-title">
+                    <h2>PARAMETERS</h2>
+                </div>
+                <div class="parameter">
+                    <div class="parameter-box">
+                        <label for="attribute">Column Attribute*</label>
+                        <select id="attribute" name="attribute">
+                            <option for="faculty" [(ngModel)]="selectedAttribute.faculty">Faculty</option>
+                            <option for="department" [(ngModel)]="selectedAttribute.department">Department</option>
+                            <option for="subjectCode" [(ngModel)]="selectedAttribute.subjectCode">Subject code</option>
+                            <option for="user" [(ngModel)]="selectedAttribute.user">User</option>
+                            <option for="attendee" [(ngModel)]="selectedAttribute.attendee">Attendee</option>
+                            <option for="date" [(ngModel)]="selectedAttribute.date">Date</option>
+                            <option for="weekday" [(ngModel)]="selectedAttribute.weekday">Weekday</option>
+                        </select>
+                    </div>
+                    <div class="parameter-box">
+                        <label for="metric">Metric*</label>
+                        <select id="metric" name="metric">
+                            <option for="distinctAttendee" [(ngModel)]="selectedMetric.distinctAttendee">Distinct attendee</option>
+                            <option for="distinctSubjectCode" [(ngModel)]="selectedMetric.distinctSubjectCode">Distinct subject code</option>
+                            <option for="distinctDepartment" [(ngModel)]="selectedMetric.distinctDepartment">Distinct department</option>
+                            <option for="distinctUser" [(ngModel)]="selectedMetric.distinctUser">Distinct user</option>
+                            <option for="distinctDate" [(ngModel)]="selectedMetric.distinctDate">Distinct date</option>
+                            <option for="distinctWeekday" [(ngModel)]="selectedMetric.distinctWeekday">Distinct weekday</option>
+                        </select>
+                    </div>
+                    <div class="parameter-box">
+                        <label for="optionalFilter">Optional Filters</label>
+                        <select id="optionalFilter" name="optionalFilter">
+                            <option for="none" [(ngModel)]="selectedOptionalFilter.none">None</option>
+                            <option for="faculty" [(ngModel)]="selectedOptionalFilter.faculty">Faculty</option>
+                            <option for="department" [(ngModel)]="selectedOptionalFilter.department">Department</option>
+                            <option for="subjectCode" [(ngModel)]="selectedOptionalFilter.subjectCode">Subject code</option>
+                            <option for="user" [(ngModel)]="selectedOptionalFilter.user">User</option>
+                            <option for="attendee" [(ngModel)]="selectedOptionalFilter.attendee">Attendee</option>
+                            <option for="date" [(ngModel)]="selectedOptionalFilter.date">Date</option>
+                            <option for="weekday" [(ngModel)]="selectedOptionalFilter.weekday">weekday</option>
+                        </select>                           
+                    </div>
+                    <div class="parameter-box">
+                        <label for="filter">Filter</label>
+                        <input type="text" id="filter" name="filter" [(ngModel)]="selectedFilter.filter">
+                    </div>
+                    <div class="buttonSearch">
+                        <button mat-button type="submit" class="btn" (click)= "search()"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-card-content class="parameter-content">
+            <div class="student-record-content">
+                <div class="student-record-title">
+                    <h2>CUSTOM RECORD</h2>
+                </div>
+                <div class="student-record">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Faculty</th>
+                          <th>Department</th>
+                          <th>Subject</th>
+                          <th>Student Number</th>
+                          <th>Attendance Rate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        </mat-card-content>
+    </mat-grid-tile>
+</mat-grid-list>

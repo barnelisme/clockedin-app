@@ -1,0 +1,216 @@
+.wholePage {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .first-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .second-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+.tableGrid{
+    width: 100%;
+}
+
+.globalGraph{
+    width: 40%;
+    height: 50%;
+}
+
+.facultySearch{
+    width: 30%;
+}
+
+.facultyTrend{
+    width: 70%;
+}
+
+.standardText {
+    padding-top: 90px;
+}
+
+.standardText h2{
+    font-size: 2.5em;
+    color: rgba(41, 135, 179, 0.87);
+}
+
+.universityGlobalGraph{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.315);
+    border-radius: 5px;
+    backdrop-filter: blur(20px); 
+}
+
+.universityGlobalCount{
+    color: #000000;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.199);
+    border-radius: 5px;
+    backdrop-filter: blur(20px); 
+}
+
+.title{
+    background-color: rgba(41, 135, 179, 0.87);
+    padding: 10px;
+}
+
+.universityGlobalCount h2{
+    color:rgb(255, 255, 255);
+    font-size: 2em;
+}
+
+.table thead, tbody, tr{
+    color: rgb(0, 0, 0);
+
+}
+
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 8px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.data-table th {
+    background-color: rgba(41, 135, 179, 0.87);
+    color: rgb(255, 255, 255);
+}
+
+.data-table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(41, 135, 179, 0.87);
+}
+
+.facultySearch{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.315);
+    border-radius: 5px;
+    backdrop-filter: blur(20px); 
+}
+
+.facultyTrend{
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.199);
+    border-radius: 5px;
+    backdrop-filter: blur(20px);
+}
+
+.facultySearch-title{
+    background-color: rgba(41, 135, 179, 0.87);
+    color:rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.trend-view {
+    background-color: rgba(41, 135, 179, 0.87);
+    color:rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+mat-form-field{
+    width: 100%;
+}
+.input-box::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #c9cdcf;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #000000;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input{
+    width: 90%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #000000;
+    font-weight: 100;
+    padding: 0 35px 0 5px;
+}
+
+.btn{
+    width: 100%;
+    height: 45px;
+    background: rgba(41, 135, 179, 0.87);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+}
+
+.btn:hover{
+    background: rgb(11, 55, 105);
+}
+
+.chartButon{
+    color: white;
+    background: rgba(41, 135, 179, 0.87);
+    width: 20%;
+    height: 5vh;
+    border: none;
+    outline: none;
+}
+
+.chartButon:hover{
+    background: rgb(11, 55, 105);
+}
+@media(max-width: 584px){
+    .wholePage{
+     max-width: 100%;
+ }
+}
+
+@media(max-width: 459px){
+    .wholePage{
+      flex-direction: column;
+    }
+}

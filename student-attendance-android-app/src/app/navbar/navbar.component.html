@@ -1,0 +1,20 @@
+<mat-toolbar class="mat-navbar">
+    <span>
+        <div class="logo">
+            <a routerLink="/admin-layout" class="admin-layout"><img src="/assets/images/logo.png" alt="logo"></a>
+        </div>
+    </span>
+    <div class="navbar_menu">
+        <button mat-button><i class="bi bi-list"></i></button>
+        <button mat-button><i class="bi bi-bell-fill"></i></button>
+        <button mat-button><i class="bi bi-gear-fill"></i></button>
+        <button mat-button><i class="bi bi-person-lines-fill"></i></button>
+    </div> 
+</mat-toolbar>
+
+<mat-toolbar class="mat-option_bar">
+    <button mat-button (click) = "studentSearch()">STUDENT</button>
+    <button mat-button (click) = "classlistSearch()">CLASSLIST</button>
+    <button mat-button (click) = "customSearch()">CUSTOM</button>
+</mat-toolbar>
+

@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+<div class="wholePage">
+    <div class="first-row">
+        <div class="globalGraph">
+        <div class="universityGlobalCount">
+            <div class="title">
+                <h2>University Global</h2>
+            </div>
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>Faculties</th>
+                    <th>Departments</th>
+                    <th>Subjects</th>
+                    <th>Students</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Engineering and the Built Environment</td>
+                    <td>1</td>
+                    <td>{{ engineeringSubjects }}</td>
+                    <td>{{ ICTattendeesNumber }}</td>
+                </tr>
+                <tr>
+                    <td>Information and communication Technology</td>
+                    <td>1</td>
+                    <td>{{ ICTSubjects }}</td>
+                    <td>{{ engineeringAttendees }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="standardText">
+            <h2>STANDARD DASHBOARD VIEW</h2>
+        </div>
+    </div>
+    <div class="universityGlobalGraph">
+
+        <button (click)="showPieChart()" class="chartButon">Pie Chart</button>
+        <button (click)="showBarChart()" class="chartButon">Bar Chart</button>
+        <button (click)="showDoughnutChart()" class="chartButon">Doughnut</button>
+
+        <ngx-charts-bar-vertical-2d
+        *ngIf="isBarChart"
+        [view]="[600,400]"
+        [results]="multiBarChar"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical-2d>
+
+        <ngx-charts-pie-chart
+        *ngIf="isPieChart"
+        [view]="[400, 300]"
+        [results]="multiPieChar"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [doughnut]="doughnut">
+      </ngx-charts-pie-chart>
+
+      <ngx-charts-pie-chart
+      *ngIf="isDoughnut"
+      [view]="[400, 300]"
+      [results]="multiPieChar"
+      [legend]="showLegend"
+      [legendTitle]="legendTitle"
+      [doughnut]="chartDoughnut">
+    </ngx-charts-pie-chart>
+    </div>
+</div>
+<div class="second-row">
+    <div class="facultySearch">
+        <div class="facultySearch-title">
+            <h2>Optional Subject Filtering for trend</h2>
+        </div>
+        <form (ngSubmit)="search()" #attendanceForm="ngForm">
+            <div class="input-box">
+                <mat-form-field>
+                <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="searchData.startDate" name="startDate" placeholder="Start Date" >
+                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            
+            <div class="input-box">
+                <mat-form-field>
+                <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="searchData.endDate" name="endDate" placeholder="End Date" >
+                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="input-box">
+                <input type="subject" [(ngModel)]="searchData.subject" name="subject" placeholder="Subject code">
+                <label>SUBJECT</label>
+            </div>
+    
+            <button type="submit" class="btn">VIEW FACULTY TREND</button>
+        </form>
+    </div>
+    <div class="facultyTrend">
+        <div class="trend-view">
+            <h2>Trend View</h2>
+        </div>
+        <ngx-charts-line-chart
+        [view]="[700,400]"
+        [results]="trendGraph"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [autoScale]="true">
+    </ngx-charts-line-chart>
+</div>
+</div>
+</div>

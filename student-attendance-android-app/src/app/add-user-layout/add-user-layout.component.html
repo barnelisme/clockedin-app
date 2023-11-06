@@ -1,0 +1,78 @@
+<div class="wholePage">
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="open-camera-button">
+      <div class="capture-canvas-container">
+        <div class="capture-image">
+          <canvas #canvas width="200" height="150" style="border: 1px solid rgba(41, 135, 179, 0.87);;">
+          </canvas>
+        </div>
+        <div class="capture-image">
+          <webcam
+          [height]="webcamHeight"
+          [width]="webcamWidth"
+          style="width: 100%; height: 400px;">
+        </webcam>
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" value="Capture" class="capture-btn" (click) = "capture()">
+        <input type="submit" value="Start Camera" class="start-btn" (click) = "StartCamera()">
+      </div>
+    </div>
+    <div class="content">
+      <div class="form">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" class = "box" placeholder="Enter your name" [(ngModel)]="name" name="name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Surname</span>
+            <input type="text" class = "box" placeholder="Enter your surname" [(ngModel)]="surname" name="surname" required>
+          </div>
+          <div class="input-box">
+            <span class="details">ID</span>
+            <input type="text" class = "box" placeholder="Enter your ID" [(ngModel)]="id" name="id" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" class = "box" placeholder="Enter your number" [(ngModel)]="number" name="number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" class = "box" placeholder="Enter your email" [(ngModel)]="email" name="email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text" class = "box" placeholder="Enter your password" [(ngModel)]="password" name="password" required>
+          </div>
+        </div>
+        <div class="position-details">
+          <input type="radio" name="user" id="dot-1" value = "user" [(ngModel)]="position">
+          <input type="radio" name="admin" id="dot-2" value = "admin" [(ngModel)]="position">
+          <input type="radio" name="manager" id="dot-3" value = "manager" [(ngModel)]="position">
+          <span class="position-title">Position</span>
+          <div class="category">
+            <label for="dot-1">
+            <span class="dot one"></span>
+            <span class="user">User</span>
+          </label>
+          <label for="dot-2">
+            <span class="dot two"></span>
+            <span class="admin">Administrator</span>
+          </label>
+          <label for="dot-3">
+            <span class="dot three"></span>
+            <span class="manager">Manager</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Register" class="register-btn" (click) = "register()">
+          <input type="submit" value="Cancel" class="cancel-btn" (click) = "cancel()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

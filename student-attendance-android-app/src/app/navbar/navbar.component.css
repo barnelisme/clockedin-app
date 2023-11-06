@@ -1,0 +1,35 @@
+.logo img{
+    width: 30%;
+    height: 30%;
+}
+
+.mat-navbar{
+    height: 15vh;
+    background-color: white;
+    color: rgba(41, 135, 179, 0.87);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight:800;
+    box-shadow: 0px 0.3px 5px rgba(0, 0, 0, 0.546);
+}
+
+.mat-navbar button{
+    font-size: 2em;
+    margin: 25px;
+}
+
+.mat-navbar button:last-child {
+    margin-right: 0;
+}
+
+.mat-option_bar{
+    background-color:rgba(41, 135, 179, 0.87);
+    color: white;
+}
+
+.mat-option_bar button:hover{
+    background-color:rgba(255, 255, 255, 0.87);
+    color: rgba(41, 135, 179, 0.87);
+    margin: 30px;
+}

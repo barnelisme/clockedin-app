@@ -1,0 +1,174 @@
+.wholePage{
+    display: flex;
+    align-items: flex-start;
+}
+.navbar{
+    width: 20%;
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.avatar img{
+    padding-top: 20%;
+    width: 100%;
+    height: 100%;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 700px;
+    margin-top: 20px;
+    margin-left: 90px;
+}
+  
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+  
+.search-input::placeholder {
+    color: #999;
+}
+  
+.search-input:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: rgba(0, 123, 255, 0.7);
+}
+
+.parameter-title{
+    background-color: aliceblue;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.parameter{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.icon {
+    font-size: 90px;
+    color: rgba(41, 135, 179, 0.87);
+}
+
+.parameter:hover{
+    color: aliceblue;
+    background-color: aliceblue;
+    padding: 10px 60px;
+    border-radius: 10px;
+}
+
+.parameter-label {
+    font-size: 20px;
+    font-weight: 100;
+    color: rgba(41, 135, 179, 0.87);
+    margin-left: 50px;
+}
+
+.mat-option_bar{
+    width: 100%;
+    background-color:rgba(151, 202, 226, 0.87);
+    color: white;
+}
+
+.mat-option_bar:hover{
+    background-color:rgba(48, 160, 212, 0.87);
+
+}
+
+.parameter-content{
+    width: 100%;
+}
+
+.tile .card{
+    width: 100%;
+    height: 50%;
+}
+
+.tile .card:hover{
+    background-color: aliceblue;
+    color: white;
+    margin: 20px;
+}
+
+.user-record table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: none;
+}
+  
+.user-record th, .user-record td {
+    border: none;
+    padding: 12px;
+    text-align: left;
+}
+  
+.user-record th {
+    background-color: aliceblue;
+    font-weight: bold;
+}
+  
+.user-record tr:hover {
+    background-color: aliceblue;
+}
+
+.user-record i{
+    color: rgba(179, 41, 41, 0.87);
+}
+
+.student-record-title{
+    background-color: rgba(41, 135, 179, 0.87);
+    color: white;
+    width: 100%;
+}
+
+.usergraph{
+    padding-top: 20%;
+}
+
+.addButton{
+    padding-top: 50%;
+    padding-left: 100%;
+}
+
+.addButton button:hover{
+    margin: 5px;
+}
+
+.addButton i{
+    color: rgba(41, 135, 179, 0.87);
+    font-size: 3em;
+}
+
+.chartButon{
+    color: white;
+    background: rgba(41, 135, 179, 0.87);
+    width: 50%;
+    height: 5vh;
+    border: none;
+    outline: none;
+}
+
+.chartButon:hover{
+    background: rgb(11, 55, 105);
+}
+
+@media(max-width: 584px){
+    .wholePage{
+     max-width: 100%;
+ }
+}
+
+@media(max-width: 459px){
+    .wholePage{
+      flex-direction: column;
+    }
+}

@@ -1,0 +1,26 @@
+<div class="wholePage">
+    <div class="container">
+      <div class="title">Remove user</div>
+      <div class="content">
+        <div class="form">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Name</span>
+              <input type="text" class = "box" placeholder="Enter your name" [(ngModel)]="user.name" required>
+            </div>
+            <div class="input-box">
+              <span class="details">Surname</span>
+              <input type="text" class = "box" placeholder="Enter your surname" [(ngModel)]="user.surname" required>
+            </div>
+            <div class="input-box">
+              <span class="details">ID</span>
+              <input type="text" class = "box" placeholder="Enter your ID" [(ngModel)]="user.id" required>
+            </div>
+          </div>
+          <div class="button">
+            <input type="submit" value="Remove" (click) = "removeUser()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

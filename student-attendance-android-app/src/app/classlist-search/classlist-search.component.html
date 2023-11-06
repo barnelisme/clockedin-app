@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+
+<mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-card-content class="parameter-content">
+            <div class="paramater-container">
+                <div class="parameter-title">
+                    <h2>PARAMETERS</h2>
+                </div>
+                <div class="parameter">
+                    <div class="parameter-box">
+                        <label for="faculty">Faculty</label>
+                        <select id="faculty" name="Faculty" [(ngModel)]="selectedFaculty" (change)="onFacultySelected(selectedFaculty)">
+                            <option *ngFor="let faculty of faculties" [value]="faculty">{{ faculty }}</option>
+                        </select>
+                    </div>
+                    <div class="parameter-box">
+                        <label for="department">Department</label>
+                        <select id="department" name="Department" [(ngModel)]="selectedDepartment" (change)="onDepartmentSelected(selectedDepartment)">
+                            <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+                        </select>
+                    </div>
+                    <div class="parameter-box">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="Subject" [(ngModel)]="selectedSubject">
+                            <option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</option>
+                        </select>                           
+                    </div>
+                    <div class="parameter-box">
+                        <label for="date">Date</label>
+                        <mat-form-field>
+                        <input matInput [matDatepicker]="date" [(ngModel)]="toDate" name="date" placeholder="Date" >
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date></mat-datepicker>
+                        </mat-form-field>                           
+                    </div>
+                    <div class="buttonSearch">
+                        <button mat-button type="submit" class="btn" (click)= "onSearch()"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<!--<mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-card-content class="parameter-content">-->
+            <div class="student-record-content">
+                <div class="student-record-title">
+                    <h2>CLASSLIST RECORD</h2>
+                </div>
+                <div class="table-container">
+                    <table class="student-table">
+                      <thead>
+                        <tr>
+                          <th>Department</th>
+                          <th>Subject</th>
+                          <th>Student Number</th>
+                          <th>Date</th>
+                          <th>Clock</th>
+                          <th>Attendance% to date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let student of students">
+                          <td>{{ student.department }}</td>
+                          <td>{{ student.subject }}</td>
+                          <td>{{ student.studentNumber }}</td>
+                          <td>-</td>
+                          <td>-</td>
+                          <td>-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+        <!--</mat-card-content>
+    </mat-grid-tile>
+</mat-grid-list>-->
