@@ -16,6 +16,10 @@ export class NavbarComponent implements OnInit{
     
   }
 
+  logout(){
+    this.router.navigate(['/login-layout']);
+  }
+
   studentSearch(){
     this.router.navigate(['/student-search']);
   }
@@ -26,6 +30,10 @@ export class NavbarComponent implements OnInit{
 
   customSearch(){
     this.router.navigate(['/custom-search']);
+  }
+
+  standardDashboard(){
+    this.router.navigate(['/admin-layout']);
   }
 
 }

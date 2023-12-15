@@ -3,48 +3,55 @@
     <div class="first-row">
         <div class="globalGraph">
         <div class="universityGlobalCount">
-            <div class="title">
-                <h2>University Global</h2>
-            </div>
-            <table class="data-table">
-                <thead>
-                <tr>
-                    <th>Faculties</th>
-                    <th>Departments</th>
-                    <th>Subjects</th>
-                    <th>Students</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Engineering and the Built Environment</td>
-                    <td>1</td>
-                    <td>{{ engineeringSubjects }}</td>
-                    <td>{{ ICTattendeesNumber }}</td>
-                </tr>
-                <tr>
-                    <td>Information and communication Technology</td>
-                    <td>1</td>
-                    <td>{{ ICTSubjects }}</td>
-                    <td>{{ engineeringAttendees }}</td>
-                </tr>
-                </tbody>
-            </table>
+
+                    <div class="global-record-content">
+                        <div class="global-record">
+                            <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSource">
+                                    <ng-container matColumnDef="faculty">
+                                      <th mat-header-cell *matHeaderCellDef> Faculty </th>
+                                      <td mat-cell *matCellDef="let element">{{ element.faculty }}</td>
+                                    </ng-container>
+                                                                        
+                                    <ng-container matColumnDef="department">
+                                      <th mat-header-cell *matHeaderCellDef> Department</th>
+                                      <td mat-cell *matCellDef="let element">{{ element.department }}</td>
+                                    </ng-container>
+                                                                        
+                                    <ng-container matColumnDef="subject">
+                                      <th mat-header-cell *matHeaderCellDef> Subjects </th>
+                                      <td mat-cell *matCellDef="let element">{{ element.subjectCode }}</td>
+                                    </ng-container>  
+                                    
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                  </table>
+
+                                  <mat-paginator [pageSizeOptions]="[4, 8, 12]"
+                                  showFirstLastButtons
+                                  aria-label="Select page of periodic elements">
+                   </mat-paginator>
+                                       
+                              </div>
+                          </div> 
+                    </div>
         </div>
 
         <div class="standardText">
             <h2>STANDARD DASHBOARD VIEW</h2>
         </div>
     </div>
-    <div class="universityGlobalGraph">
 
-        <button (click)="showPieChart()" class="chartButon">Pie Chart</button>
-        <button (click)="showBarChart()" class="chartButon">Bar Chart</button>
-        <button (click)="showDoughnutChart()" class="chartButon">Doughnut</button>
+    <div class="parameterbuttons">
+        <button (click)="showPieChart()" class="chartButon1">Pie Chart</button>
+        <button (click)="showBarChart()" class="chartButon2">Bar Chart</button>
+        <button (click)="showDoughnutChart()" class="chartButon3">Doughnut</button> 
+    </div>
+    <div class="universityGlobalGraph">
 
         <ngx-charts-bar-vertical-2d
         *ngIf="isBarChart"
-        [view]="[600,400]"
+        [view]="[350,250]"
         [results]="multiBarChar"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -54,25 +61,121 @@
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel">
-        </ngx-charts-bar-vertical-2d>
+        </ngx-charts-bar-vertical-2d> 
 
-        <ngx-charts-pie-chart
-        *ngIf="isPieChart"
-        [view]="[400, 300]"
-        [results]="multiPieChar"
+        <ngx-charts-bar-vertical-2d
+        *ngIf="isBarChart"
+        [view]="[350,250]"
+        [results]="multiBarChar2"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
         [legend]="showLegend"
-        [legendTitle]="legendTitle"
-        [doughnut]="doughnut">
-      </ngx-charts-pie-chart>
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical-2d> 
+
+        <ngx-charts-bar-vertical-2d
+        *ngIf="isBarChart"
+        [view]="[350,250]"
+        [results]="multiBarChar3"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical-2d> 
+
+        <ngx-charts-bar-vertical-2d
+        *ngIf="isBarChart"
+        [view]="[350,250]"
+        [results]="multiBarChar4"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical-2d> 
 
       <ngx-charts-pie-chart
-      *ngIf="isDoughnut"
-      [view]="[400, 300]"
+      *ngIf="isPieChart"
+      [view]="[350, 200]"
       [results]="multiPieChar"
       [legend]="showLegend"
       [legendTitle]="legendTitle"
-      [doughnut]="chartDoughnut">
+      [doughnut]="doughnut">
     </ngx-charts-pie-chart>
+
+    <ngx-charts-pie-chart
+    *ngIf="isPieChart"
+    [view]="[350, 200]"
+    [results]="multiPieChar2"
+    [legend]="showLegend"
+    [legendTitle]="legendTitle"
+    [doughnut]="doughnut">
+  </ngx-charts-pie-chart>
+
+  <ngx-charts-pie-chart
+  *ngIf="isPieChart"
+  [view]="[350, 200]"
+  [results]="multiPieChar3"
+  [legend]="showLegend"
+  [legendTitle]="legendTitle"
+  [doughnut]="doughnut">
+</ngx-charts-pie-chart>
+
+<ngx-charts-pie-chart
+*ngIf="isPieChart"
+[view]="[350, 200]"
+[results]="multiPieChar4"
+[legend]="showLegend"
+[legendTitle]="legendTitle"
+[doughnut]="doughnut">
+</ngx-charts-pie-chart>
+
+<ngx-charts-pie-chart
+*ngIf="isDoughnut"
+[view]="[350, 200]"
+[results]="multiPieChar"
+[legend]="showLegend"
+[legendTitle]="legendTitle"
+[doughnut]="chartDoughnut">
+</ngx-charts-pie-chart>
+
+<ngx-charts-pie-chart
+*ngIf="isDoughnut"
+[view]="[350, 200]"
+[results]="multiPieChar2"
+[legend]="showLegend"
+[legendTitle]="legendTitle"
+[doughnut]="chartDoughnut">
+</ngx-charts-pie-chart>
+
+<ngx-charts-pie-chart
+*ngIf="isDoughnut"
+[view]="[350, 200]"
+[results]="multiPieChar3"
+[legend]="showLegend"
+[legendTitle]="legendTitle"
+[doughnut]="chartDoughnut">
+</ngx-charts-pie-chart>
+
+<ngx-charts-pie-chart
+*ngIf="isDoughnut"
+[view]="[350, 200]"
+[results]="multiPieChar4"
+[legend]="showLegend"
+[legendTitle]="legendTitle"
+[doughnut]="chartDoughnut">
+</ngx-charts-pie-chart>
     </div>
 </div>
 <div class="second-row">

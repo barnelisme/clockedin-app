@@ -1,14 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { studentRecord } from './studentRecord';
 
 @Component({
   selector: 'app-student-search',
   templateUrl: './student-search.component.html',
   styleUrls: ['./student-search.component.css']
 })
-export class StudentSearchComponent implements OnInit {
+export class StudentSearchComponent implements OnInit,AfterViewInit,OnDestroy {
 
+  obs!:Observable<any>;
+  displayedColumns: string[] = ['studentNumber', 'actions'];
+  dataSource = new MatTableDataSource<string>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy():void {
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    
+    this.dataSource.filterPredicate = (data: string, filter: string) => {
+      return data.toLowerCase().includes(filter);
+    };
+  
+    this.dataSource.filter = filterValue.trim();
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  
   faculties: string[] = [];
   departments: string[] = [];
   subjects: string[] = [];
@@ -38,6 +72,7 @@ export class StudentSearchComponent implements OnInit {
     this.service.getAllStudents().subscribe(
       (data:string[]) => {
         this.studentNumbers = data;
+        this.dataSource.data = data;
       },
       (error) => {
         console.error('Could not fetch student numbers:', error);
@@ -78,26 +113,26 @@ export class StudentSearchComponent implements OnInit {
   
   onStudentNumberInput() {
     if (this.typedStudentNumber) {
-      this.suggestedStudentNumbers = this.studentNumbers.filter(number =>
-        number.toLowerCase().includes(this.typedStudentNumber.toLowerCase())
+      this.suggestedStudentNumbers = this.studentNumbers.filter(index =>
+        index.toLowerCase().includes(this.typedStudentNumber.toLowerCase())
       );
     } else {
       this.suggestedStudentNumbers = [];
     }
   }
 
-  onSelectSuggestedStudentNumber(number: string) {
-    this.typedStudentNumber = number;
+  onSelectSuggestedStudentNumber(index: string) {
+    this.typedStudentNumber = index;
     this.suggestedStudentNumbers = [];
   }
 
-  sendDataToSearch(){
+  selectStudent(studentNumber: string): void {
 
     const dataToSend = {
       faculty: this.selectedFaculty,
       department: this.selectedDepartment,
       subject: this.selectedSubject,
-      studentNumber: this.typedStudentNumber,
+      studentNumber: studentNumber,
     };
 
     this.service.sendSelectedData(dataToSend).subscribe(

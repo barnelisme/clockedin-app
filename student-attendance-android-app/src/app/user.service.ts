@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginUser } from './login-layout/login-user';
 import { user } from './add-user-layout/user';
+import { SubjectModel } from './admin-layout/SubjectModel';
 
 
 @Injectable({
@@ -19,12 +20,8 @@ export class UserService {
     return this.http.get<LoginUser[]>("http://localhost:9001/studentList");
   }
 
-  getEngineeringSubjects(){
-    return this.http.get<number>("http://localhost:9001/engineeringSubjects");
-  }
-
-  getICTSubjects(){
-    return this.http.get<number>("http://localhost:9001/ICTSubjects");
+  getParameter(){
+    return this.http.get<SubjectModel[]>("http://localhost:9001/globalParameter");
   }
 
   getAttendees(){

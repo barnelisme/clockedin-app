@@ -1,14 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,AfterViewInit,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { user } from '../add-user-layout/user';
 import { UserService } from '../user.service';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { Observable } from 'rxjs';
+
+export interface ManagerInterface {
+  surname: string;
+  id: number;
+  position: string;
+}
 
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
   styleUrls: ['./manager.component.css']
 })
-export class ManagerComponent implements OnInit{
+export class ManagerComponent implements OnInit,AfterViewInit,OnDestroy{
+
+  obs!:Observable<any>;
+  displayedColumns: string[] = ['surname', 'id', 'position', 'deleteBtn'];
+  dataSource = new MatTableDataSource<user>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy():void {
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   gradient = false;
   showLegend = true;
@@ -43,6 +78,7 @@ export class ManagerComponent implements OnInit{
   ngOnInit(): void {
     this.service.getAllUsers().subscribe((data: user[]) => {
       this.userlist = data;
+      this.dataSource.data = data;
       this.updatePieChartData()
       this.updateUserList();
     });
@@ -54,14 +90,6 @@ export class ManagerComponent implements OnInit{
 
   add(){
     this.router.navigate(['/add-user-layout']);
-  }
-
-  remove(){
-    this.router.navigate(['/remove-user-layout']);
-  }
-
-  viewUser(){
-    this.router.navigate(['/view-user-layout']);
   }
 
   pageChanged(event: any) {

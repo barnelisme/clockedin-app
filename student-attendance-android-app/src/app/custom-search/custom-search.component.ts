@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-search',
@@ -8,6 +9,8 @@ import { UserService } from '../user.service';
   styleUrls: ['./custom-search.component.css']
 })
 export class CustomSearchComponent implements OnInit {
+
+  @ViewChild('form') form!: NgForm;
 
   selectedAttribute:any = {
     faculty:'',

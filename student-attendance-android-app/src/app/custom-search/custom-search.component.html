@@ -1,9 +1,11 @@
+<!--
+
 <app-navbar></app-navbar>
 
 <mat-grid-list cols="1" rowHeight="200px">
     <mat-grid-tile>
         <mat-card-content class="parameter-content">
-            <div class="paramater-container">
+            <div class="paramater-container" ngForm #form="ngForm">
                 <div class="parameter-title">
                     <h2>PARAMETERS</h2>
                 </div>
@@ -48,8 +50,9 @@
                         <label for="filter">Filter</label>
                         <input type="text" id="filter" name="filter" [(ngModel)]="selectedFilter.filter">
                     </div>
+
                     <div class="buttonSearch">
-                        <button mat-button type="submit" class="btn" (click)= "search()"><i class="bi bi-search"></i></button>
+                        <button mat-button type="submit" class="btn" (click)="search()"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -66,26 +69,88 @@
                 </div>
                 <div class="student-record">
                     <table>
-                      <thead>
-                        <tr>
-                          <th>Faculty</th>
-                          <th>Department</th>
-                          <th>Subject</th>
-                          <th>Student Number</th>
-                          <th>Attendance Rate</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
+                        <thead>
+                            <tr>
+                              <th>Faculty</th>
+                              <th>Department</th>
+                              <th>Subject</th>
+                              <th>Student Number</th>
+                              <th>Attendance Rate</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
                     </table>
-                  </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-grid-tile>
+</mat-grid-list>
+
+-->
+<app-navbar></app-navbar>
+
+<mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-card-content class="parameter-content">
+            <div class="paramater-container" ngForm #form="ngForm">
+                <div class="parameter-title">
+                    <h2>PARAMETERS</h2>
+                </div>
+                <div class="parameter">
+                    <div class="parameter-box">
+                        <!-- ... your other controls ... -->
+                    </div>
+                    <div class="parameter-box">
+                        <label for="filter">Filter</label>
+                        <input type="text" id="filter" name="filter" [(ngModel)]="selectedFilter.filter">
+                    </div>
+
+                    <div class="buttonSearch">
+                        <button mat-button type="submit" class="btn" (click)="search()"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list cols="1" rowHeight="200px">
+    <mat-grid-tile>
+        <mat-card-content class="parameter-content">
+            <div class="student-record-content">
+                <div class="student-record-title">
+                    <h2>CUSTOM RECORD</h2>
+                </div>
+                <div class="student-record">
+                    <table>
+                        <thead>
+                            <tr>
+                              <th>Faculty</th>
+                              <th>Department</th>
+                              <th>Subject</th>
+                              <th>Student Number</th>
+                              <th>Attendance Rate</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          </tbody>
+                    </table>
+                </div>
             </div>
         </mat-card-content>
     </mat-grid-tile>

@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../user.service';
 import { HttpClient } from '@angular/common/http';
 import { formData } from './formData';
 import { DatePipe } from '@angular/common';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { SubjectModel } from './SubjectModel';
+import { MatPaginator } from '@angular/material/paginator';
+
+export interface subjectInterface {
+  faculty: string;
+  department: string;
+  subject: string;
+}
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit{
+export class AdminLayoutComponent implements OnInit,AfterViewInit,OnDestroy{
+
+  obs!:Observable<any>;
+  displayedColumns: string[] = ['faculty', 'department', 'subject'];
+  dataSource = new MatTableDataSource<SubjectModel>([]);
 
   searchData: formData = {
     startDate: new Date,
@@ -17,8 +31,15 @@ export class AdminLayoutComponent implements OnInit{
     subject:''
   };
 
-  engineeringSubjects:number = 0;
-  ICTSubjects:number = 0;
+  globalParameter: SubjectModel[] = [];
+
+  parameter: SubjectModel = {
+    faculty: '',
+    facultyNumber: 0,
+    department: 0,
+    subjectCode: 0
+  };
+
   ICTattendeesNumber:number = 0;
   engineeringAttendees: number = 13;
 
@@ -46,6 +67,16 @@ export class AdminLayoutComponent implements OnInit{
 
   public multiBarChar: any[] = [];
   public multiPieChar: any[] = [];
+
+  public multiBarChar2: any[] = [];
+  public multiPieChar2: any[] = [];
+
+  public multiBarChar3: any[] = [];
+  public multiPieChar3: any[] = [];
+
+  public multiBarChar4: any[] = [];
+  public multiPieChar4: any[] = [];
+
   public trendGraph: any[] = [];
 
   isPieChart: boolean = true;
@@ -54,17 +85,45 @@ export class AdminLayoutComponent implements OnInit{
 
   constructor(private http: HttpClient, private service: UserService, private datePipe: DatePipe){}
 
-  ngOnInit(): void {
-    this.getEngineeringSubjects();
-    this.getICTSubjects();
-    this.getICTAttendees();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
-  getEngineeringSubjects() {
-    this.service.getEngineeringSubjects().subscribe(
-      (data: number) => {
-        this.engineeringSubjects = data;
+  ngOnDestroy():void {
+    if (this.dataSource) {
+      this.dataSource.disconnect();
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+
+  ngOnInit(): void {
+    this.getICTAttendees();
+    this.getGlobalParameter();
+  }
+
+  getGlobalParameter() {
+    this.service.getParameter().subscribe(
+      (data: SubjectModel[]) => {
+
+        console.log(data);
+
+        this.globalParameter = data;
+        this.dataSource.data = data;
         this.updateMultiData();
+        this.updateMultiData2()
+        this.updateMultiData3();
+        this.updateMultiData4()
       },
       (error) => {
         console.error('Error getting engineering subjects:', error);
@@ -72,17 +131,6 @@ export class AdminLayoutComponent implements OnInit{
     );
   }
 
-  getICTSubjects() {
-    this.service.getICTSubjects().subscribe(
-      (data: number) => {
-        this.ICTSubjects = data;
-        this.updateMultiData();
-      },
-      (error) => {
-        console.error('Error getting ICT subjects:', error);
-      }
-    );
-  }
 
   getICTAttendees() {
     this.service.getAttendees().subscribe(
@@ -95,53 +143,175 @@ export class AdminLayoutComponent implements OnInit{
     );
   }
 
-  updateMultiData() {
-    if (this.searchData.startDate !== null  && this.searchData.endDate !== null) {
-      this.multiBarChar = [
-        {
-          "name": "Engineering and the Built Environment",
-          "series": [
-            {
-              "name": "Subjects",
-              "value": this.engineeringSubjects
-            },
-            {
-              "name": "Departement",
-              "value": 1
-            }
-          ]
-        },
-        {
-          "name": "Information and Communication Technology",
-          "series": [
-            {
-              "name": "Subjects",
-              "value": this.ICTSubjects
-            },
-            {
-              "name": "Departement",
-              "value": 1
-            }
-          ]
-        }
-      ];
+updateMultiData() {
+  if (this.globalParameter && this.globalParameter.length > 0) {
+    const firstItem = this.globalParameter[0];
 
-      this.multiPieChar = [
-        {
-          name: 'Engineering Subjects',
-          value: this.engineeringSubjects,
-        },
-        {
-          name: 'ICT Subjects',
-          value: this.ICTSubjects,
-        },
-        {
-          name: 'Department',
-          value: 1,
-        },
-      ];
-    }
+    this.parameter.faculty = firstItem.faculty;
+    this.parameter.facultyNumber = firstItem.facultyNumber;
+    this.parameter.department = firstItem.department;
+    this.parameter.subjectCode = firstItem.subjectCode;
+
+    this.multiBarChar = [
+      {
+        "name": this.parameter.faculty,
+        "series": [
+          {
+            "name": "Subjects",
+            "value": this.parameter.subjectCode
+          },
+          {
+            "name": "Departement",
+            "value": this.parameter.department
+          }
+        ]
+      }
+    ];
+
+    this.multiPieChar = [
+      {
+        name: 'Faculty',
+        value: this.parameter.facultyNumber,
+      },
+      {
+        name: 'Department',
+        value: this.parameter.department,
+      },
+      {
+        name: 'Subject',
+        value: this.parameter.subjectCode,
+      },
+    ];
   }
+}
+
+updateMultiData2() {
+  if (this.globalParameter && this.globalParameter.length > 0) {
+    const secondItem = this.globalParameter[1];
+
+    this.parameter.faculty = secondItem.faculty;
+    this.parameter.facultyNumber = secondItem.facultyNumber;
+    this.parameter.department = secondItem.department;
+    this.parameter.subjectCode = secondItem.subjectCode;
+
+    this.multiBarChar2 = [
+      {
+        "name": this.parameter.faculty,
+        "series": [
+          {
+            "name": "Subjects",
+            "value": this.parameter.subjectCode
+          },
+          {
+            "name": "Departement",
+            "value": this.parameter.department
+          }
+        ]
+      }
+    ];
+
+    this.multiPieChar2 = [
+      {
+        name: 'Faculty',
+        value: this.parameter.facultyNumber,
+      },
+      {
+        name: 'Department',
+        value: this.parameter.department,
+      },
+      {
+        name: 'Subject',
+        value: this.parameter.subjectCode,
+      },
+    ];
+  }
+}
+
+updateMultiData3() {
+  if (this.globalParameter && this.globalParameter.length > 0) {
+    const thirdItem = this.globalParameter[2];
+
+    this.parameter.faculty = thirdItem.faculty;
+    this.parameter.facultyNumber = thirdItem.facultyNumber;
+    this.parameter.department = thirdItem.department;
+    this.parameter.subjectCode = thirdItem.subjectCode;
+
+    this.multiBarChar3 = [
+      {
+        "name": this.parameter.faculty,
+        "series": [
+          {
+            "name": "Subjects",
+            "value": this.parameter.subjectCode
+          },
+          {
+            "name": "Departement",
+            "value": this.parameter.department
+          }
+        ]
+      }
+    ];
+
+    this.multiPieChar3 = [
+      {
+        name: 'Faculty',
+        value: this.parameter.facultyNumber,
+      },
+      {
+        name: 'Department',
+        value: this.parameter.department,
+      },
+      {
+        name: 'Subject',
+        value: this.parameter.subjectCode,
+      },
+    ];
+  }
+}
+
+
+updateMultiData4() {
+  if (this.globalParameter && this.globalParameter.length > 0) {
+    const fourthItem = this.globalParameter[3];
+
+    this.parameter.faculty = fourthItem.faculty;
+    this.parameter.facultyNumber = fourthItem.facultyNumber;
+    this.parameter.department = fourthItem.department;
+    this.parameter.subjectCode = fourthItem.subjectCode;
+
+    this.multiBarChar4 = [
+      {
+        "name": this.parameter.faculty,
+        "series": [
+          {
+            "name": "Subjects",
+            "value": this.parameter.subjectCode
+          },
+          {
+            "name": "Departement",
+            "value": this.parameter.department
+          }
+        ]
+      }
+    ];
+
+    this.multiPieChar4 = [
+      {
+        name: 'Faculty',
+        value: this.parameter.facultyNumber,
+      },
+      {
+        name: 'Department',
+        value: this.parameter.department,
+      },
+      {
+        name: 'Subject',
+        value: this.parameter.subjectCode,
+      },
+    ];
+  }
+}
+
 
   search() {
   console.log(this.searchData);
