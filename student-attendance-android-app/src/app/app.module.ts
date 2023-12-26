@@ -15,7 +15,7 @@ import { CustomSearchComponent } from './custom-search/custom-search.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
-import { DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { ManagerComponent } from './manager/manager.component';
 import { AddUserLayoutComponent } from './add-user-layout/add-user-layout.component';
 import { RemoveUserLayoutComponent } from './remove-user-layout/remove-user-layout.component';
@@ -44,6 +44,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FilterUsersPipe } from './filter-users.pipe';
 import {WebcamModule} from 'ngx-webcam';
 import { ImageUploadComponent } from './add-user-layout/image-upload/image-upload.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { FooterComponent } from './footer/footer.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,8 @@ import { ImageUploadComponent } from './add-user-layout/image-upload/image-uploa
     ViewUserLayoutComponent,
     NavbarComponent,
     FilterUsersPipe,
-    ImageUploadComponent
+    ImageUploadComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +99,18 @@ import { ImageUploadComponent } from './add-user-layout/image-upload/image-uploa
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
-    WebcamModule
+    WebcamModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    MatChipsModule,
+    CdkDropList,
+    CdkDrag
+    
+    
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Observable } from 'rxjs';
+import { ScaleType } from '@swimlane/ngx-charts';
 
 export interface ManagerInterface {
   surname: string;
@@ -23,6 +24,13 @@ export class ManagerComponent implements OnInit,AfterViewInit,OnDestroy{
   obs!:Observable<any>;
   displayedColumns: string[] = ['surname', 'id', 'position', 'deleteBtn'];
   dataSource = new MatTableDataSource<user>([]);
+
+  scheme = {
+    name: 'ticketStatusScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#FFA500', '#FFFF00', '#ADD8E6', '#FFFF50', '#FFFE90', '#FFF0DB']
+  };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

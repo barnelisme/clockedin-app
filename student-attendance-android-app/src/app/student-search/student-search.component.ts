@@ -2,9 +2,10 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { studentRecord } from './studentRecord';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-student-search',
@@ -66,6 +67,10 @@ export class StudentSearchComponent implements OnInit,AfterViewInit,OnDestroy {
     attendanceRate:''
   }
 
+  myControl = new FormControl('');
+  options = this.studentNumbers;
+  filteredOptions: Observable<string[]> | undefined; 
+
   constructor(private http: HttpClient, private service: UserService){}
 
   ngOnInit():void{
@@ -73,6 +78,7 @@ export class StudentSearchComponent implements OnInit,AfterViewInit,OnDestroy {
       (data:string[]) => {
         this.studentNumbers = data;
         this.dataSource.data = data;
+        this.options = this.studentNumbers;
       },
       (error) => {
         console.error('Could not fetch student numbers:', error);
@@ -87,6 +93,21 @@ export class StudentSearchComponent implements OnInit,AfterViewInit,OnDestroy {
         console.error('Could not fetch faculties:', error);
       }
     );
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  trackByFn(index: number, item: string): string {
+    return item; 
   }
 
   onFacultySelected(faculty: string): void {
@@ -126,13 +147,13 @@ export class StudentSearchComponent implements OnInit,AfterViewInit,OnDestroy {
     this.suggestedStudentNumbers = [];
   }
 
-  selectStudent(studentNumber: string): void {
+  onSearch() {
 
     const dataToSend = {
       faculty: this.selectedFaculty,
       department: this.selectedDepartment,
       subject: this.selectedSubject,
-      studentNumber: studentNumber,
+      studentNumber: this.myControl.value
     };
 
     this.service.sendSelectedData(dataToSend).subscribe(

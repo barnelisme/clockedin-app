@@ -11,6 +11,8 @@ import { LoginUser } from './login-user';
 })
 export class LoginLayoutComponent implements OnInit {
 
+  hide = true;
+
   userlist: LoginUser[] = [];
 
   loginObj: LoginUser = {

@@ -4,9 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { formData } from './formData';
 import { DatePipe } from '@angular/common';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { SubjectModel } from './SubjectModel';
 import { MatPaginator } from '@angular/material/paginator';
+import { FormControl } from '@angular/forms';
+import { ScaleType } from '@swimlane/ngx-charts';
 
 export interface subjectInterface {
   faculty: string;
@@ -48,6 +50,7 @@ export class AdminLayoutComponent implements OnInit,AfterViewInit,OnDestroy{
   height: number = 300;
   fitContainer: boolean = false;
   legendTitle :string = "University Global Status"
+  legendOptions = true;
   view: any[] = [600, 400];
   showXAxis = true;
   showYAxis = true;
@@ -60,11 +63,15 @@ export class AdminLayoutComponent implements OnInit,AfterViewInit,OnDestroy{
   timeline = true;
   doughnut = false;
   chartDoughnut = true;
-  colorScheme = {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
-  };
-  showLabels = true;
 
+  scheme = {
+    name: 'ticketStatusScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#FFA500', '#FFFF00', '#ADD8E6', '#FFFF50', '#FFFE90', '#FFF0DB']
+  };
+  
+  showLabels = true;
   public multiBarChar: any[] = [];
   public multiPieChar: any[] = [];
 
@@ -82,6 +89,12 @@ export class AdminLayoutComponent implements OnInit,AfterViewInit,OnDestroy{
   isPieChart: boolean = true;
   isBarChart: boolean = false;
   isDoughnut: boolean = false;
+
+    // Ripple values
+    color:string = "#FF4D0030";
+    radius:number = 30;
+    centered:boolean = true;
+    unbounded:boolean = true;
 
   constructor(private http: HttpClient, private service: UserService, private datePipe: DatePipe){}
 
@@ -337,7 +350,7 @@ updateMultiData4() {
       }
     );
   }
-
+/*
   showPieChart() {
     this.isPieChart = true;
     this.isBarChart = false;
@@ -355,4 +368,23 @@ updateMultiData4() {
     this.isBarChart = false;
     this.isDoughnut = true;
   }
+*/
+  updatePieChartType() {
+    this.isPieChart = true;
+    this.isBarChart = false;
+    this.isDoughnut = false;
+  }
+
+  updateBarChartType() {
+    this.isPieChart = false;
+    this.isBarChart = true;
+    this.isDoughnut = false;
+  }
+
+  updateDoughnutChartType() {
+    this.isPieChart = false;
+    this.isBarChart = false;
+    this.isDoughnut = true;
+  }
+  
 }

@@ -22,11 +22,13 @@
 }
 
 .globalGraph{
-    width: 64%;
+    width: 90%;
+    padding-left: 10%;
+    padding-top: 1%;
 }
 
 .global-record th {
-    background-color: rgba(41, 135, 179, 0.87);
+    background-color: #ff9a00;
     font-size: 1.3em;
     color: white;
 }
@@ -51,6 +53,8 @@
 
 .standardText {
     padding-top: 90px;
+    padding-left: 30%;
+    margin-bottom: 10%;
 }
 
 .standardText h2{
@@ -111,7 +115,7 @@
 }
 
 .data-table tbody tr:hover {
-    background-color: rgba(41, 135, 179, 0.87);
+    background-color: #ff9a00;
 }
 
 .facultySearch{
@@ -129,13 +133,13 @@
 }
 
 .facultySearch-title{
-    background-color: rgba(41, 135, 179, 0.87);
+    background-color: #ADD8E6;
     color:rgb(255, 255, 255);
     padding: 10px;
 }
 
 .trend-view {
-    background-color: rgba(41, 135, 179, 0.87);
+    background-color: #ADD8E6;
     color:rgb(255, 255, 255);
     padding: 10px;
 }
@@ -192,7 +196,7 @@ mat-form-field{
 .btn{
     width: 100%;
     height: 45px;
-    background: rgba(41, 135, 179, 0.87);
+    background: #ADD8E6;
     border: none;
     outline: none;
     border-radius: 6px;
@@ -260,11 +264,18 @@ mat-form-field{
     padding: 54px;
 
 }
-
 .chartButon3:hover{
     background: #775aaf;
 }
 
+.parameterbuttons {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-checkbox {
+    margin-bottom: 20%;
+}
 
 @media(max-width: 584px){
     .wholePage{

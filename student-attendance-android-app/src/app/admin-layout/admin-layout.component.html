@@ -1,9 +1,16 @@
 <app-navbar></app-navbar>
+
+
 <div class="wholePage">
     <div class="first-row">
         <div class="globalGraph">
         <div class="universityGlobalCount">
-
+            <div class="searchbar">
+                <mat-form-field>
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Managment" #input>
+                </mat-form-field>
+            </div>
                     <div class="global-record-content">
                         <div class="global-record">
                             <div class="mat-elevation-z8">
@@ -42,16 +49,38 @@
         </div>
     </div>
 
-    <div class="parameterbuttons">
+<!--    <div class="parameterbuttons">
         <button (click)="showPieChart()" class="chartButon1">Pie Chart</button>
         <button (click)="showBarChart()" class="chartButon2">Bar Chart</button>
         <button (click)="showDoughnutChart()" class="chartButon3">Doughnut</button> 
-    </div>
+    </div>  -->
+      
     <div class="universityGlobalGraph">
+
+        <div class="parameterbuttons">
+            <mat-checkbox matRipple
+            [matRippleColor]="color" 
+            [matRippleRadius]="radius" 
+            [matRippleCentered]="centered"
+            [matRippleUnbounded]="unbounded"
+            [(ngModel)]="isPieChart" (change)="updatePieChartType()">Pie Chart</mat-checkbox>
+            <mat-checkbox matRipple
+            [matRippleColor]="color" 
+            [matRippleRadius]="radius" 
+            [matRippleCentered]="centered"
+            [matRippleUnbounded]="unbounded"
+            [(ngModel)]="isBarChart" (change)="updateBarChartType()">Bar Chart</mat-checkbox>
+            <mat-checkbox matRipple
+            [matRippleColor]="color" 
+            [matRippleRadius]="radius" 
+            [matRippleCentered]="centered"
+            [matRippleUnbounded]="unbounded"
+            [(ngModel)]="isDoughnut" (change)="updateDoughnutChartType()">Doughnut</mat-checkbox>
+          </div>
 
         <ngx-charts-bar-vertical-2d
         *ngIf="isBarChart"
-        [view]="[350,250]"
+        [view]="[300,200]"
         [results]="multiBarChar"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -60,12 +89,13 @@
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
+        [yAxisLabel]="yAxisLabel"
+        [scheme]="scheme">
         </ngx-charts-bar-vertical-2d> 
 
         <ngx-charts-bar-vertical-2d
         *ngIf="isBarChart"
-        [view]="[350,250]"
+        [view]="[300,200]"
         [results]="multiBarChar2"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -74,12 +104,13 @@
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
+        [yAxisLabel]="yAxisLabel"
+        [scheme]="scheme">
         </ngx-charts-bar-vertical-2d> 
 
         <ngx-charts-bar-vertical-2d
         *ngIf="isBarChart"
-        [view]="[350,250]"
+        [view]="[300,200]"
         [results]="multiBarChar3"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -88,12 +119,13 @@
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
+        [yAxisLabel]="yAxisLabel"
+        [scheme]="scheme">
         </ngx-charts-bar-vertical-2d> 
 
         <ngx-charts-bar-vertical-2d
         *ngIf="isBarChart"
-        [view]="[350,250]"
+        [view]="[300,200]"
         [results]="multiBarChar4"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -102,79 +134,88 @@
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
+        [yAxisLabel]="yAxisLabel"
+        [scheme]="scheme">
         </ngx-charts-bar-vertical-2d> 
 
+        <ngx-charts-pie-chart
+        *ngIf="isPieChart"
+        [view]="[300,200]"
+        [results]="multiPieChar"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [doughnut]="doughnut"
+        [scheme]="scheme">
+      </ngx-charts-pie-chart>
+  
       <ngx-charts-pie-chart
       *ngIf="isPieChart"
-      [view]="[350, 200]"
-      [results]="multiPieChar"
+      [view]="[300,200]"
+      [results]="multiPieChar2"
       [legend]="showLegend"
       [legendTitle]="legendTitle"
-      [doughnut]="doughnut">
+      [doughnut]="doughnut"
+      [scheme]="scheme">
     </ngx-charts-pie-chart>
-
+  
     <ngx-charts-pie-chart
     *ngIf="isPieChart"
-    [view]="[350, 200]"
-    [results]="multiPieChar2"
+    [view]="[300,200]"
+    [results]="multiPieChar3"
     [legend]="showLegend"
     [legendTitle]="legendTitle"
-    [doughnut]="doughnut">
+    [doughnut]="doughnut"
+    [scheme]="scheme">
   </ngx-charts-pie-chart>
-
+  
   <ngx-charts-pie-chart
   *ngIf="isPieChart"
-  [view]="[350, 200]"
-  [results]="multiPieChar3"
+  [view]="[300,200]"
+  [results]="multiPieChar4"
   [legend]="showLegend"
   [legendTitle]="legendTitle"
-  [doughnut]="doughnut">
-</ngx-charts-pie-chart>
-
-<ngx-charts-pie-chart
-*ngIf="isPieChart"
-[view]="[350, 200]"
-[results]="multiPieChar4"
-[legend]="showLegend"
-[legendTitle]="legendTitle"
-[doughnut]="doughnut">
-</ngx-charts-pie-chart>
+  [doughnut]="doughnut"
+  [scheme]="scheme">
+  </ngx-charts-pie-chart>
 
 <ngx-charts-pie-chart
 *ngIf="isDoughnut"
-[view]="[350, 200]"
+[view]="[300,200]"
 [results]="multiPieChar"
 [legend]="showLegend"
 [legendTitle]="legendTitle"
-[doughnut]="chartDoughnut">
+[doughnut]="chartDoughnut"
+[scheme]="scheme">
 </ngx-charts-pie-chart>
 
 <ngx-charts-pie-chart
 *ngIf="isDoughnut"
-[view]="[350, 200]"
+[view]="[300,200]"
 [results]="multiPieChar2"
 [legend]="showLegend"
 [legendTitle]="legendTitle"
-[doughnut]="chartDoughnut">
+[doughnut]="chartDoughnut"
+[scheme]="scheme">
 </ngx-charts-pie-chart>
 
 <ngx-charts-pie-chart
 *ngIf="isDoughnut"
-[view]="[350, 200]"
+[view]="[300,200]"
 [results]="multiPieChar3"
 [legend]="showLegend"
 [legendTitle]="legendTitle"
-[doughnut]="chartDoughnut">
+[doughnut]="chartDoughnut"
+[scheme]="scheme">
 </ngx-charts-pie-chart>
 
 <ngx-charts-pie-chart
 *ngIf="isDoughnut"
-[view]="[350, 200]"
+[view]="[300,200]"
 [results]="multiPieChar4"
 [legend]="showLegend"
 [legendTitle]="legendTitle"
-[doughnut]="chartDoughnut">
+[doughnut]="chartDoughnut"
+[scheme]="scheme">
 </ngx-charts-pie-chart>
     </div>
 </div>

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/assets/images/backgound.jpg');
+    background-color: #ADD8E6;
     background-size: cover;
     background-position: center;
 }
@@ -122,7 +122,7 @@
 }
 
 .wrapper .btn:hover {
-    background: #cecece;
+    background: rgb(228, 168, 79)
 }
 
 .wrapper .register-link {

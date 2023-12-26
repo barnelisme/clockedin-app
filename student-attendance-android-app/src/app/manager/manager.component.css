@@ -136,9 +136,11 @@ td, th {
 }
 
 .student-record-title{
-    background-color: rgba(41, 135, 179, 0.87);
+    background-color: #ff9a00;
     color: white;
-    width: 100%;
+    width: 20%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
 }
 
 .top{
